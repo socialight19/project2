@@ -8,7 +8,12 @@
   <%= submit_tag("Search") %></center>
 <% end %>
 
- if current user has unchecked questions display flash
+ if current user has unchecked questions display flash<br>
+*notices when creating user <br>
+notices when loggin in<br>
+unable to edit other peoples profile<br>
+nice login and user forms <br>
+users can only edit their own posts<br>
 
 
 
@@ -19,13 +24,23 @@
                   <section class="questionbodyinsideuser ">  
 
 
-                  <%= image_tag @user, :class => "indexavatar" %>       
+                  <%= image_tag @user, :class => "indexavatar" %>    
+                   
 
 
                       <h3><%= question.question_asked %></h3>
-                        <td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
-                  <td><%= link_to 'Edit', edit_question_path(question), :class => "deletequestion" %></td>
-                      <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+
+                        <%= current_user.id %> Current user <br>
+                        <%= question.user_id %> User <br> 
+                        <% if current_user.id == question.user_id %>
+                            <td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
+                            <td><%= link_to 'Edit', edit_question_path(question), :class => "deletequestion" %></td>
+                            <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+                        <% else %>
+                            <td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
+                        <% end %>
+
+                        
                  </section>   
                  <section>
                   <ul>

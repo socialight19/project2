@@ -1,5 +1,12 @@
 source 'https://rubygems.org'
 
+ruby "2.2.1"
+
+group :production do
+	gem 'pg'
+	gem 'rails_12factor'
+end
+
 gem 'carrierwave'
 #gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
@@ -57,4 +64,6 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+
+gem 'puma'
 

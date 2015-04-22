@@ -40,9 +40,11 @@ div {
 }
 
 .field_with_errors {
-  padding: 2px;
-  background-color: red;
+  padding: 1px;
+  background-color: #F2DEDE;
   display: table;
+  margin: 0 auto;
+  border-radius: 2px;
 }
 
 #error_explanation {
