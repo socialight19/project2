@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Question asked:</strong>
+  <%= @question.question_asked %>
+</p>
+
+<% @question.answers.each do |answer| %>
+<p>
+  <strong>Answer:</strong>
+  <%= answer.answer_given %>
+</p>
+<% end %>
+
+ 							<section>
+								<%= form_for [@question, @answer] do |f| %>
+
+									<div>
+										<%= f.label :answer_given %>
+										<%= f.text_area :answer_given, :class => "form-control" %>
+										<%#= f.hidden_field :answer, :value => @answer.id %>
+										<%#= f.hidden_field :question_id, :value => question.id %>
+										<%#= f.hidden_field :user_id, :value => @user.id %>
+
+									</div>
+
+									<%= f.submit "Answer Question", :class => "btn-warning" %>
+								<% end %>
+							</section>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', user_path(@question.user_id) %>

@@ -1,0 +1,64 @@
+
+
+
+<p id="notice"><%= notice %></p>
+
+  <%= form_tag(questions_path, {method: "get"}) do %>
+  <center><%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %></center>
+<% end %>
+
+ if current user has unchecked questions display flash
+
+
+
+        <section class="center col-md-10">
+            <% @questions.reverse_each do |question| %>
+                <div class="questionanswer ">
+                <section class="table-bordered orangebackground">
+                  <section class="questionbodyinsideuser ">  
+
+
+                  <%= image_tag @user, :class => "indexavatar" %>       
+
+
+                      <h3><%= question.question_asked %></h3>
+                        <td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
+                  <td><%= link_to 'Edit', edit_question_path(question), :class => "deletequestion" %></td>
+                      <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+                 </section>   
+                 <section>
+                  <ul>
+                <% question.answers.each do |answer| %>
+                  <li>
+                    <%= answer.answer_given  %>
+
+                    <%= link_to 'Delete', answer, method: :delete, data: { confirm: 'Are you sure?' }, :class => "deletequestion" %>
+                  </li>
+                  
+                <% end %>
+                </ul>
+              </section>
+            </section>
+
+
+<!-- 
+                    <% question.answers.each do |x| %>
+                      Answer<%= x.answer_given %>
+                    <% end %> -->
+
+                   
+                </div>
+            <% end %>
+        </section>
+        <p></p>
+
+              </div>
+          </div>
+      </section>
+
+
+
+<br>
+
+<%= link_to 'New Question', new_question_path %>

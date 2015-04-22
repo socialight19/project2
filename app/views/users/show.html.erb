@@ -1,0 +1,220 @@
+
+<body>
+<!-- <div class="col-md-12 subheader"></div> -->
+    
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Jumbotron Header -->
+        <div class="col-md-4 col-sm-5 hero-feature ">
+	        <header class="jumbotron hero-spacer img-responsive bg-primary whitetext text-center">
+	        <%= image_tag @user.image, :class => "avatar" %>
+	        	<%#= image_tag("ww.jpg", :alt => "profile", :class => "img-responsive") %>
+
+	        	<section class="aboutsection text-left">
+	        		<h4 class="text-center">About <%= @user.name %></h4>
+	        		<p class="aboutsection small">Hobbies: <%= @user.hobbies %></p>
+
+	        		<p class="aboutsection small"><strong>Questions Answered:</strong> 10</p>
+	        		<p class="aboutsection small"><strong>Questions Asked:</strong> 87</p>
+	        	</section>
+
+
+	        </header>
+	        
+        </div>
+	       
+	        <div class="col-lg-6"> 
+
+
+	        	<h1><%= @user.name %> <%= @user.last_name %></h1>
+	        	<h4><%= @user.job %></h4>
+	            <p><strong>Area Of Expertise:</strong> <%= @user.areas_of_expertise %></p>
+
+	              <% if logged_in? %>
+					<%= link_to 'Edit Profile', edit_user_path(@user) %>
+
+				<% else %>
+				<% end %>
+				<p id="notice"><%= notice %></p>
+
+
+
+	            
+	            <!-- <p><a class="btn btn-primary btn-large">Ask Me A Question!</a>
+	            </p> -->
+	        </div>
+
+        
+
+        <!-- Title -->
+
+
+
+
+
+
+
+
+        <section  class="col-lg-6 answers2 ">
+	        <div class="row ">
+	            <div class="col-lg-12">
+
+	            <% if logged_in? %>
+
+	             <section>
+	             <div class="askaquestion text-right">
+    				<h2 class="text-center">Ask A Question!</h2>
+    					<%= form_for [@user, @question] do |f| %> 
+
+        			<div>
+            			<%= f.text_area :question_asked, placeholder: "What can I help you with?", :class => "form-control"%>
+        			</div>
+				        <%= f.submit "Ask!", :class => "btn btn-primary " %>
+				    <% end %>
+				    </div>
+
+
+				</section>
+
+
+
+				
+					<section>
+				    <% @user.questions.reverse_each do |question| %>
+				        <div class="questionanswer">
+				        <section class="table-bordered orangebackground">
+				       		<section class="questionbodyinsideuser ">			      
+				            	<h3><%= question.question_asked %></h3>
+					            	<td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
+									<td><%= link_to 'Edit', edit_question_path(question), :class => "deletequestion" %></td>
+							        <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+						     </section> 	
+						     <section>
+						    	<ul>
+								<% question.answers.each do |answer| %>
+									<li>
+										<%= answer.answer_given  %>
+
+										<%= link_to 'Delete', answer, method: :delete, data: { confirm: 'Are you sure?' }, :class => "deletequestion" %>
+									</li>
+									
+								<% end %>
+								</ul>
+							</section>
+						</section>
+
+
+<!-- 
+				            <% question.answers.each do |x| %>
+				            	Answer<%= x.answer_given %>
+				            <% end %> -->
+
+				            <section class="answerfield">
+								<%= form_for :answer do |f| %>
+
+									<div>
+										
+										<%= f.text_area :answer_given, :class => "form-control", :placeholder => "Answer Here" %>
+										<%= f.hidden_field :question_id, :value => question.id %>
+										<%= f.hidden_field :user_id, :value => @user.id %>
+
+									</div>
+
+									<%= f.submit "Answer Question", :class => "btn btn-danger pull-right" %>
+								<% end %>
+							</section>
+				        </div>
+				    <% end %>
+				</section>
+				<p></p>
+
+	            </div>
+	        </div>
+	    </section>
+
+	   
+
+
+
+
+
+	    <!-- if you are logged off below -->
+
+	                       
+        <% else %>
+
+        		<section>
+    				<center>
+    					<h2>Questions</h2>
+    					 <h5><%= link_to '(Log In To Ask Questions)', login_path, :class => "muted" %></h3>
+    				</center>
+    					
+        			<div>
+            			
+        			</div>
+				     
+				</section>
+
+
+				<section>
+				    <% @user.questions.reverse_each do |question| %>
+				        <div class="questionanswer">
+				       		<section>			      
+				            	<h3><%= question.question_asked %>
+				            
+					            <% @question.answers.each do |answer| %>
+					            	<%= answer.answer_given %>
+					            <% end %>
+					            	
+						     </section> 	
+
+						    <section>
+								<% question.answers.each do |answer| %>
+									<ul>
+										<td><%= answer.answer_given %></td>
+										
+									</ul>
+								<% end %>
+							</section>
+
+<!-- 
+				            <% question.answers.each do |x| %>
+				            	Answer<%= x.answer_given %>
+				            <% end %> -->
+
+				        
+				        </div>
+				    <% end %>
+				</section>
+				<p></p>
+
+	            </div>
+	        </div>
+	    </section>
+
+                        	
+                <% end %>
+
+
+       
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Askme 2015</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+
+</body>
+
+	           
+

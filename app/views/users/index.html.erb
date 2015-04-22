@@ -1,0 +1,93 @@
+</head>
+
+<body>
+
+
+<%= form_tag(users_path, {method: "get"}) do %>
+  <center><%= text_field_tag(:q) %>
+  <%= submit_tag("Seach") %></center>
+<% end %>
+
+     <!-- Page Features -->
+     <div class="center" >
+        <!-- /.row -->
+         <!-- Page Features -->
+        <div class="row text-center">
+            <!-- begin individual section -->
+            <% @users.reverse_each do |user| %>
+            <div class="col-md-4 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <!-- <img src="http://placehold.it/800x500" alt=""> -->
+                              <%= image_tag user.image, :class => "indexavatar" %>
+
+
+                    <div class="caption">
+                        <h3><%= user.name %> <%= user.last_name %></h3>
+                        <p><%= user.job %></p>
+                        <p>
+                            <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?'}, :class => "btn btn-primary"  %> <%= link_to 'Show', user, :class => "btn btn-primary" %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+            <!-- end individual section --> 
+        </div>
+    </div>
+
+    
+        <!-- /.row -->
+
+    
+
+
+    <!-- /.container -->
+
+    <!-- jQuery -->
+   <!--  // <script src="js/jquery.js"></script>
+
+    // Bootstrap Core JavaScript
+    // <script src="js/bootstrap.min.js"></script> -->
+
+
+
+
+
+
+<p id="notice"><%= notice %></p>
+
+
+<p>You are logged in as <%#= current_user.email %> </p>
+<p><%= link_to 'Log Out', logout_path, method: :delete %></p> 
+
+
+
+
+
+<h1>Listing Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.email %></td>
+        <td><%= user.name %></td>
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User', new_user_path %>
