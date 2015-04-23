@@ -25,12 +25,8 @@
                       <h3><%= question.question_asked %></h3>
 
                       
-                        <% if logged_in? && current_user.id == question.asked_by %>
-                            <td><%= link_to 'Expand', question, :class => "deletequestion" %></td>                        
-                            <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
-                        <% else %>
-                            <td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
-                        <% end %>
+                       
+                            <td><%= link_to 'Go To User', user_path(question.user_id), :class => "deletequestion" %></td>
 
                         
                  </section>   

@@ -7,7 +7,7 @@
     <div class="container">
 
         <!-- Jumbotron Header -->
-        <div class="col-md-4 col-sm-5 hero-feature ">
+        <div class="col-md-3 col-sm-5 hero-feature ">
 	        <header class="jumbotron hero-spacer img-responsive bg-primary whitetext text-center">
 	        <%= image_tag @user.image, :class => "avatar" %>
 	        	<%#= image_tag("ww.jpg", :alt => "profile", :class => "img-responsive") %>
@@ -57,24 +57,29 @@
 
 
 
-        <section  class="col-lg-6 answers2 ">
+        <section  class="col-lg-8 answers2 ">
 	        <div class="row ">
 	            <div class="col-lg-12">
 
 	            <% if logged_in? %>
 
 	             <section>
-	             <div class="askaquestion text-right">
-    				<h2 class="text-center">Ask A Question!</h2>
-    					<%= form_for [@user, @question] do |f| %> 
-
-        			<div>
-            			<%= f.text_area :question_asked, placeholder: "What can I help you with?", :class => "form-control"%>
-            			<%= f.hidden_field :asked_by, :value => current_user.id %>
-        			</div>
-				        <%= f.submit "Ask!", :class => "btn btn-primary " %>
-				    <% end %>
+	             <div class="askaquestion text-right ">
+	             	<div class="questionform">
+    				<!-- <h2 class="text-center">Ask A Question!</h2> -->
+    					<div class="questionimageform">
+    						<%= image_tag User.find(current_user.id).image, :class => "current_user_image effect1" %> <%= form_for [@user, @question] do |f| %>     				
+	        				<div class="questionimagebutton">
+	            				<%= f.text_area :question_asked, placeholder: "Ask Me A Question", :class => "form-control askquestioninputform"%>
+	            				<%= f.hidden_field :asked_by, :value => current_user.id %>
+	            				<div class="buttoninputform">
+	            				<%= f.submit "Ask!", :class => "btn btn-primary " %>
+	            				</div>
+	            			</div>
+				   		 	<% end %>
+				   		</div>
 				    </div>
+				</div>
 
 
 				</section>
@@ -84,26 +89,27 @@
 				
 					<section>
 				    <% @user.questions.reverse_each do |question| %>
-				        <div class="questionanswer">
-				        <section class="table-bordered orangebackground">
-				       		<section class="questionbodyinsideuser ">			      
-				            	<h3><%= image_tag User.find(question.asked_by).image, :class => "avatarmini" %> <%= question.question_asked %></h3>
-
-				            		
-
+				        <div class="askaquestion">
+				        	<div class="answersinsideuser"  >
+				        	<section class="table-bordered orangebackground">
+				       			<section class="questionbodyinsideuser ">			      
+				            			<h3><%= image_tag User.find(question.asked_by).image, :class => "avatarmini" %> <%= question.question_asked %></h3>				            	
 				            	         <% if edit_access(question) %>
 			            					<td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
         							        <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
             					            
-				            				<% else %>
+				            			<% else %>
 				            					<td><%= link_to 'Expand', question, :class => "deletequestion" %></td>        							       
-				            				<% end %>
+				            			<% end %>
 					            	
-						     </section> 	
+						     	</section> 
+
+
+
 						     <section>
 						    	<ul>
 								<% question.answers.each do |answer| %>
-									<li>
+									<li class="answerli active text-muted">
 										<%#= image_tag User.find(answer.answered_by).image, :class => "avatarmini" %> 
 										<%= image_tag User.find(answer.answered_by).image, :class => "avatarmini" %> <%= answer.answer_given  %><br>										
 										<% if logged_in? && current_user.id == answer.answered_by %>
@@ -138,6 +144,7 @@
 									<%= f.submit "Answer Question", :class => "btn btn-danger pull-right" %>
 								<% end %>
 							</section>
+				        </div>
 				        </div>
 				    <% end %>
 				</section>

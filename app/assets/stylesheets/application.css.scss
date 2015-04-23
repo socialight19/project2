@@ -26,9 +26,17 @@
 
 }
 
+.answerli {
+	background-color: pink;
+}
+
 input {
 	font-size: 24px;
 	margin: 10px
+}
+
+.buttoninputform {
+	margin-right: 12px
 }
 
 
@@ -51,7 +59,7 @@ input {
 
 
 body {
-	background-color: #EFEFEF;
+	background-color: rgb(241,241,241);
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     margin: 0;
     font-family: 'Lato', sans-serif;
@@ -209,14 +217,71 @@ section {
 	padding-bottom: 10px;
 	opacity: 1;
 }
+
+.questionimageform {
+	padding-top: 20px;
+}
 .askaquestion {
-	background-color: rgb(239, 239, 239);
-	padding: 5px 20px 25px 20px;
-	margin: 0;
+	background-color: #FFFFFF;
+	padding: 0px 20px 19px 20px;
+	margin: 20px;
 	-moz-border-radius: 0px;
 	-webkit-border-radius: 10px 10px 5px 5px;
-	border-radius: 10px 10px 5px 5px; 
+	border-radius: 2px 2px 2px 2px;
+	border: 1px solid #dedede;
+	-webkit-box-shadow: 0 0 5px #dedede;
 
+}
+
+.askaquestionimage {
+	background-color: red;
+	display: inline-block;
+
+}
+
+.effect1{
+	-webkit-box-shadow: 0 10px 6px -6px #777;
+	   -moz-box-shadow: 0 10px 6px -6px #777;
+	        box-shadow: 0 10px 6px -6px #777;
+
+	        border-radius: 2px;
+}
+
+.answersinsideuser {
+	padding: 20px;
+}
+
+
+.current_user_image {
+	max-width: 72px;
+	max-height: 90px;
+	margin-left: 14px;
+	float: left;
+}
+.btn {
+	  font-size: 16px;
+}
+
+.questionform {
+	padding-top: 20px;
+	max-width: 90%;
+	margin: 0 auto;
+}
+
+.askquestioninputform {
+	margin: 0 auto;
+	max-width: 85%;
+
+	margin: 0;
+	font-size: 27px;
+}
+
+.questionimagebutton {
+margin-left: 20px;
+}
+
+.buttoninputform {
+	display: inline-block;
 }
 
 .something {
@@ -234,12 +299,13 @@ text-align:center
 }
 
 .questionanswer {
-	    margin: 0 auto;
+	  margin: 0 auto;
 
 	 /*border: 1px solid #E8E8E8;*/
 	 margin: 20px;
-    /*padding: 20px; 
-    width: 90%;*/
+    padding-bottom: 20px;
+    padding-top: 20px; 
+   /* width: 90%;*/
     /*background-color: #E8E8E8;*/
 
 }

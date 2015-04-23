@@ -12,6 +12,15 @@
 
 <%= render 'layouts/navbar' %>
 
+ <% if flash[:welcome] %>
+        <h4 class="bg-success flash col-md-4 center text-center"><%= flash[:welcome] %></h4>
+    <% end %>
+
+    <% if flash[:error] %>
+        <h4 class="bg-danger flash col-md-4 center text-center"><%= flash[:error] %></h4>
+ <% end %>
+
+
 <%= yield %>
 
 </body>
