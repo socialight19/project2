@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resources :answers
 
-  root "users#index"
+  root "questions#index"
   get "users" => "users#index"
   get "users/signup" => "users#new"
     get "signup" => "users#new"
@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   post 'users/:id' => 'users#answer'
   delete 'answer/:id' => 'answers#destroy'
+
+  get 'users/:id/questions/:id' => 'questions#show'
 
   #post 'questions/:id' => 'questions#answerinsidequestion'
 

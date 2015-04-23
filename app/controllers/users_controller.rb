@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
   def answer
     @question = Question.find(params[:answer][:question_id])
-    answer = Answer.new(params.require(:answer).permit(:answer_given, :user_id))
+    answer = Answer.new(params.require(:answer).permit(:answer_given, :user_id, :answered_by))
     @question.answers << answer
     @question.save
     redirect_to user_path

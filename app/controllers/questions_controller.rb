@@ -6,6 +6,7 @@ class QuestionsController < ApplicationController
   # GET /questions.json
 
 
+
     def index 
 
       if params[:q]
@@ -49,7 +50,7 @@ class QuestionsController < ApplicationController
     #binding.pry
     @user = User.find(params[:id])
     
-    @question = @user.questions.new(params.require(:question).permit(:question_asked, answer_attributes: [:answer_given]))
+    @question = @user.questions.new(params.require(:question).permit(:question_asked, :asked_by, answer_attributes: [:answer_given, :answered_by]))
 
     respond_to do |format|
       if @question.save
@@ -92,7 +93,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to user_path(@question.user_id), notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to request.referrer, notice: 'Question was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -105,6 +106,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:question_asked, :user_id)
+      params.require(:question).permit(:question_asked, :user_id, :asked_by)
     end
 end

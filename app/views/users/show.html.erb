@@ -32,7 +32,7 @@
 	        	<h4><%= @user.job %></h4>
 	            <p><strong>Area Of Expertise:</strong> <%= @user.areas_of_expertise %></p>
 
-	              <% if logged_in? %>
+	               <% if logged_in? && current_user.id == @question.user_id %>
 					<%= link_to 'Edit Profile', edit_user_path(@user) %>
 
 				<% else %>
@@ -70,6 +70,7 @@
 
         			<div>
             			<%= f.text_area :question_asked, placeholder: "What can I help you with?", :class => "form-control"%>
+            			<%= f.hidden_field :asked_by, :value => current_user.id %>
         			</div>
 				        <%= f.submit "Ask!", :class => "btn btn-primary " %>
 				    <% end %>
@@ -86,18 +87,29 @@
 				        <div class="questionanswer">
 				        <section class="table-bordered orangebackground">
 				       		<section class="questionbodyinsideuser ">			      
-				            	<h3><%= question.question_asked %></h3>
-					            	<td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
-									<td><%= link_to 'Edit', edit_question_path(question), :class => "deletequestion" %></td>
-							        <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+				            	<h3><%= image_tag User.find(question.asked_by).image, :class => "avatarmini" %> <%= question.question_asked %></h3>
+
+				            		
+
+				            	         <% if edit_access(question) %>
+			            					<td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
+        							        <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+            					            
+				            				<% else %>
+				            					<td><%= link_to 'Expand', question, :class => "deletequestion" %></td>        							       
+				            				<% end %>
+					            	
 						     </section> 	
 						     <section>
 						    	<ul>
 								<% question.answers.each do |answer| %>
 									<li>
-										<%= answer.answer_given  %>
-
+										<%#= image_tag User.find(answer.answered_by).image, :class => "avatarmini" %> 
+										<%= image_tag User.find(answer.answered_by).image, :class => "avatarmini" %> <%= answer.answer_given  %><br>										
+										<% if logged_in? && current_user.id == answer.answered_by %>
 										<%= link_to 'Delete', answer, method: :delete, data: { confirm: 'Are you sure?' }, :class => "deletequestion" %>
+
+										<% end %>
 									</li>
 									
 								<% end %>
@@ -119,6 +131,7 @@
 										<%= f.text_area :answer_given, :class => "form-control", :placeholder => "Answer Here" %>
 										<%= f.hidden_field :question_id, :value => question.id %>
 										<%= f.hidden_field :user_id, :value => @user.id %>
+										<%= f.hidden_field :answered_by, :value => current_user.id %>
 
 									</div>
 

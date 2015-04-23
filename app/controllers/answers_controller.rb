@@ -12,7 +12,7 @@ class AnswersController < ApplicationController
 
     def answerinsidequestion
       @question = Question.find(params[:id])
-      @answer = @question.answers.new(params.require(:answer).permit(:answer_given, :user_id))
+      @answer = @question.answers.new(params.require(:answer).permit(:answer_given, :user_id, :answered_by))
       @question.save
       redirect_to question_path(@question)
     end
@@ -20,7 +20,7 @@ class AnswersController < ApplicationController
 def create
 	#binding.pry
     @user = User.find(params[:id])
-    @answer = @user.questions.answer.new(params.require(:answer).permit(:answer_given, :user_id))
+    @answer = @user.questions.answer.new(params.require(:answer).permit(:answer_given, :user_id, :answered_by))
     
     #@question = Question.find(params[:id])
     #@answer = @question.answers.new(params.require(:answer).permit(:answer_given, :user_id))
@@ -44,7 +44,7 @@ def destroy
 
 
 def question_params
-      params.require(:question).permit(:question_asked, :user_id)
+      params.require(:question).permit(:question_asked, :user_id, :answered_by)
     end
 
 

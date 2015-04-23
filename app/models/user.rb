@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-	has_many :questions
-	has_many :answers
+	has_many :questions, :dependent => :destroy
+	has_many :answers, :dependent => :destroy
 	accepts_nested_attributes_for :answers
 	mount_uploader :image, AvatarUploader
 

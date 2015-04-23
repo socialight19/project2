@@ -14,6 +14,8 @@ notices when loggin in<br>
 unable to edit other peoples profile<br>
 nice login and user forms <br>
 users can only edit their own posts<br>
+style the questions view page <br>
+unable to edit other peoples profiles <br>
 
 
 
@@ -30,11 +32,9 @@ users can only edit their own posts<br>
 
                       <h3><%= question.question_asked %></h3>
 
-                        <%= current_user.id %> Current user <br>
-                        <%= question.user_id %> User <br> 
-                        <% if current_user.id == question.user_id %>
-                            <td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
-                            <td><%= link_to 'Edit', edit_question_path(question), :class => "deletequestion" %></td>
+                      
+                        <% if logged_in? && current_user.id == question.asked_by %>
+                            <td><%= link_to 'Expand', question, :class => "deletequestion" %></td>                        
                             <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
                         <% else %>
                             <td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
