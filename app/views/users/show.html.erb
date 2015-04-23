@@ -175,39 +175,61 @@
             			
         			</div>
 				     
+
+
 				</section>
 
 
-				<section>
-				    <% @user.questions.reverse_each do |question| %>
-				        <div class="questionanswer">
-				       		<section>			      
-				            	<h3><%= question.question_asked %>
-				            
-					            <% @question.answers.each do |answer| %>
-					            	<%= answer.answer_given %>
-					            <% end %>
-					            	
-						     </section> 	
 
-						    <section>
-								<% question.answers.each do |answer| %>
-									<ul>
-										<td><%= answer.answer_given %></td>
-										
-									</ul>
-								<% end %>
-							</section>
+									<section>
+								    <% @user.questions.reverse_each do |question| %>
+								        <div class="askaquestion">
+								        	<div class="answersinsideuser"  >
+								        	<section class="table-bordered orangebackground">
+								       			<section class="questionbodyinsideuser ">			      
+								            			<h3><%= image_tag User.find(question.asked_by).image, :class => "avatarmini" %> <%= question.question_asked %></h3>				            	
+								            	         <% if edit_access(question) %>
+							            					<td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
+				        							        <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+				            					            
+								            			<% else %>
+								            					<td><%= link_to 'Expand', question, :class => "deletequestion" %></td>        							       
+								            			<% end %>
+									            	
+										     	</section> 
 
-<!-- 
-				            <% question.answers.each do |x| %>
-				            	Answer<%= x.answer_given %>
-				            <% end %> -->
 
-				        
-				        </div>
-				    <% end %>
-				</section>
+
+										     <section>
+										    	<ul>
+												<% question.answers.each do |answer| %>
+													<li class="answerli active text-muted">
+														<%#= image_tag User.find(answer.answered_by).image, :class => "avatarmini" %> 
+														<%= image_tag User.find(answer.answered_by).image, :class => "avatarmini" %> <%= answer.answer_given  %><br>										
+														<% if logged_in? && current_user.id == answer.answered_by %>
+														<%= link_to 'Delete', answer, method: :delete, data: { confirm: 'Are you sure?' }, :class => "deletequestion" %>
+
+														<% end %>
+													</li>
+													
+												<% end %>
+												</ul>
+											</section>
+										</section>
+
+
+				<!-- 
+								            <% question.answers.each do |x| %>
+								            	Answer<%= x.answer_given %>
+								            <% end %> -->
+
+								            
+								        </div>
+								        </div>
+								    <% end %>
+								</section>
+
+			
 				<p></p>
 
 	            </div>
