@@ -53,13 +53,15 @@
     <%= f.password_field :password %>
   </div>
 
-   <div>
-    <%= f.file_field :image %>
+    <div class="field">
+    <%= f.label 'Profile_Image' %><br>
+
+    <%= f.file_field :image, :class => "form-control" %>
   </div>
 
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-danger" %>
   </div>
 
  

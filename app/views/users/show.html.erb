@@ -95,11 +95,10 @@
 				       			<section class="questionbodyinsideuser ">			      
 				            			<h3><%= image_tag User.find(question.asked_by).image, :class => "avatarmini" %> <%= question.question_asked %></h3>				            	
 				            	         <% if edit_access(question) %>
-			            					<td><%= link_to 'Expand', question, :class => "deletequestion" %></td>
-        							        <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
+			            					   <td><%= link_to 'Delete', question, :class => "deletequestion", method: :delete, data: { confirm: 'Are you sure?' } %></td> 
             					            
 				            			<% else %>
-				            					<td><%= link_to 'Expand', question, :class => "deletequestion" %></td>        							       
+				            				        							       
 				            			<% end %>
 					            	
 						     	</section> 

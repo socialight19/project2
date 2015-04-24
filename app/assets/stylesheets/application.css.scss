@@ -56,7 +56,12 @@ input {
 .logout {
 	padding-left: 50%;
 }
-
+.field {
+	.form-control {
+		max-width: 200px;
+		margin: 0 auto;
+	}
+}
 
 body {
 	background-color: rgb(241,241,241);
@@ -137,9 +142,9 @@ footer {
 
 .avatarmini {
 	margin: 0 auto;
-	max-width: 25px;
+	max-width: 96px;
 	margin-left: 10px;
-	border-radius: 7px;
+	border-radius: 2px;
 
 }
 .avatar {

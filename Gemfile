@@ -7,6 +7,8 @@ group :production do
 	gem 'rails_12factor'
 end
 
+gem "figaro"
+
 gem 'carrierwave'
 #gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
